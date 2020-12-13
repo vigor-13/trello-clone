@@ -6,7 +6,7 @@
         <a
           href=""
           class="modal-default-button"
-          @click.prevent="close"
+          @click.prevent="SET_IS_ADD_BOARD(false)"
         >
           &times;
         </a>
@@ -40,6 +40,7 @@
 </template>
 
 <script>
+import { mapMutations, mapActions } from 'vuex';
 import Modal from './Modal';
 
 export default {
@@ -63,13 +64,22 @@ export default {
   },
 
   methods: {
-    close() {
-      this.$emit('close');
-    },
+    ...mapMutations([
+      'SET_IS_ADD_BOARD',
+    ]),
+
+    ...mapActions([
+      'ADD_BOARD',
+      'FETCH_BOARDS',
+    ]),
 
     addBoard() {
-      this.$emit('close');
-      this.$emit('submit', this.input);
+      this
+        .ADD_BOARD({ title: this.input })
+        .then(() => {
+          this.SET_IS_ADD_BOARD(false);
+          this.FETCH_BOARDS();
+        });
     }
   }
 }
