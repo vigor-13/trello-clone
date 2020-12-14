@@ -28,6 +28,11 @@ const mutations = {
     state.token = null;
     delete localStorage.token;
     api.setAuthInHeader(null);
+  },
+
+  SET_THEME (state, color) {
+    state.bodyColor = color || '#ffffff';
+    state.navbarColor = color ? 'rgba(0,0,0,0.15)' : '#026aa7';
   }
 }
 
