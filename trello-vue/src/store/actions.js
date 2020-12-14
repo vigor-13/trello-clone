@@ -39,6 +39,12 @@ const actions = {
       });
   },
 
+  UPDATE_CARD({ dispatch, state }, { id, title, description, pos, listId }) {
+    return api.card
+      .update(id, {title, description, pos, listId})
+      .then(() => dispatch('FETCH_BOARD', { id: state.board.id }));
+  },
+
   LOGIN ({ commit }, { email, password }) {
     return api.auth
       .login(email, password)
