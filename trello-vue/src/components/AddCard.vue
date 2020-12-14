@@ -26,7 +26,11 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
+  props: ['listId'],
+
   data() {
     return {
       inputTitle: ''
@@ -44,16 +48,31 @@ export default {
     this.setupClickOutSide(this.$el);
   },
 
-  methods: {
-    onSubmit() {
+  beforeDestroy() {
+    document.querySelector('body').removeEventListener('click', this.setupClickOutSideHandler);
+  },
 
+  methods: {
+    ...mapActions([
+      'ADD_CARD',
+    ]),
+
+    onSubmit() {
+      if (this.invalidInput) return;
+
+      const { inputTitle, listId } = this;
+      this
+        .ADD_CARD({ title: inputTitle, listId })
+        .finally(() => this.inputTitle = '');
     },
 
     setupClickOutSide(el) {
-      document.querySelector('body').addEventListener('click', (e) => {
-        if (el.contains(e.target)) return
-        this.$emit('close');
-      });
+      document.querySelector('body').addEventListener('click', (e) => this.setupClickOutSideHandler(e, el));
+    },
+
+    setupClickOutSideHandler(e, el) {
+      if (el.contains(e.target)) return
+      this.$emit('close');
     }
   }
 }

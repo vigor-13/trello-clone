@@ -5,9 +5,18 @@
         {{ data.title }}
       </div>
     </div>
-
+    <div class="card-list">
+      <CardItem
+        v-for="card in data.cards"
+        :key="card.id"
+        :data="card"
+      />
+    </div>
     <div v-if="isAddCard">
-      <AddCard @close="isAddCard=false" />
+      <AddCard
+        :list-id="data.id"
+        @close="isAddCard=false"
+      />
     </div>
     <div v-else>
       <a
@@ -23,10 +32,16 @@
 
 <script>
 import AddCard from './AddCard';
+import CardItem from './CardItem';
 
 export default {
-  components: { AddCard },
+  components: {
+    AddCard,
+    CardItem,
+  },
+
   props: ['data'],
+
   data() {
     return {
       isAddCard: false,
@@ -71,7 +86,7 @@ export default {
 }
 .card-list {
   flex: 1 1 auto;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
 }
 .empty-card-item   {
   height: 10px;
