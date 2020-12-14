@@ -45,6 +45,12 @@ const actions = {
       .then(() => dispatch('FETCH_BOARD', { id: state.board.id }));
   },
 
+  DELETE_CARD({ dispatch, state }, { id }) {
+    return api.card
+      .destroy(id)
+      .then(() => dispatch('FETCH_BOARD', { id: state.board.id }));
+  },
+
   LOGIN ({ commit }, { email, password }) {
     return api.auth
       .login(email, password)
