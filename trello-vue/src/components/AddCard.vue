@@ -61,8 +61,9 @@ export default {
       if (this.invalidInput) return;
 
       const { inputTitle, listId } = this;
+      const pos = this.newCardPos();
       this
-        .ADD_CARD({ title: inputTitle, listId })
+        .ADD_CARD({ title: inputTitle, listId, pos })
         .finally(() => this.inputTitle = '');
     },
 
@@ -73,6 +74,14 @@ export default {
     setupClickOutSideHandler(e, el) {
       if (el.contains(e.target)) return
       this.$emit('close');
+    },
+
+    newCardPos() {
+      const curList = this.$store.state.board.lists.filter(l => l.id === this.listId)[0]
+      if (!curList) return 65535;
+      const { cards } = curList;
+      if (!cards.length) return 65535;
+      return cards[cards.length - 1].pos * 2;
     }
   }
 }
