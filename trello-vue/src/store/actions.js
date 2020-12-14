@@ -2,7 +2,9 @@ import * as api from '../api';
 
 const actions = {
   ADD_BOARD(_, {title}) {
-    return api.board.create(title);
+    return api.board
+      .create(title)
+      .then((data) => data.item);
   },
 
   FETCH_BOARDS ({commit}) {
@@ -11,6 +13,12 @@ const actions = {
       .then((data) => {
         commit('SET_BOARDS', data.list);
       });
+  },
+
+  FETCH_BOARD ({ commit }, { id }) {
+    return api.board.fetch(id).then((data) => {
+      commit('SET_BOARD', data.item);
+    })
   },
 
   LOGIN ({ commit }, { email, password }) {

@@ -76,9 +76,9 @@ export default {
     addBoard() {
       this
         .ADD_BOARD({ title: this.input })
-        .then(() => {
+        .then(({ id }) => {
           this.SET_IS_ADD_BOARD(false);
-          this.FETCH_BOARDS();
+          this.$router.push(`/b/${id}`);
         });
     }
   }
