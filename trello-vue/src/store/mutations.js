@@ -13,6 +13,10 @@ const mutations = {
     state.board = board;
   },
 
+  SET_CARD (state, card) {
+    state.card = card;
+  },
+
   LOGIN (state, token) {
     if (!token) return;
     state.token = token;

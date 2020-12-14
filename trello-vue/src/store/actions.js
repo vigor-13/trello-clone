@@ -31,6 +31,14 @@ const actions = {
       })
   },
 
+  FETCH_CARD({ commit }, { id }) {
+    return api.card
+      .fetch(id)
+      .then((data) => {
+        commit('SET_CARD', data.item);
+      });
+  },
+
   LOGIN ({ commit }, { email, password }) {
     return api.auth
       .login(email, password)
