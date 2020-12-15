@@ -14,6 +14,7 @@
       <div v-else class="list-header-title" @click.prevent="onClickTitle">
         {{ data.title }}
       </div>
+      <a class="delete-list-btn" @click.prevent="onDeleteList" href="">&times;</a>
     </div>
     <div class="card-list">
       <CardItem
@@ -68,6 +69,7 @@ export default {
   methods: {
     ...mapActions([
       'UPDATE_LIST',
+      'DELETE_LIST',
     ]),
 
     onClickTitle() {
@@ -91,6 +93,11 @@ export default {
       if (title === this.data.title) return;
 
       this.UPDATE_LIST({ id, title });
+    },
+
+    onDeleteList() {
+      if (!window.confirm(`Delete ${this.data.title} List?`)) return;
+      this.DELETE_LIST({ id: this.data.id });
     }
   }
 }

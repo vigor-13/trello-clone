@@ -50,6 +50,14 @@ const actions = {
       });
   },
 
+  DELETE_LIST({ dispatch, state }, { id }) {
+    return api.list
+      .destroy(id)
+      .then(() => {
+        dispatch('FETCH_BOARD', { id: state.board.id });
+      })
+  },
+
   ADD_CARD ({ dispatch, state }, { title, listId, pos }) {
     return api.card
       .create(title, listId, pos)
