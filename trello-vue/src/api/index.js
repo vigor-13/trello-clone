@@ -31,6 +31,12 @@ export const setAuthInHeader = (token) => {
     : null;
 }
 
+export const auth = {
+  login(email, password) {
+    return request('post', '/login', { email, password });
+  }
+}
+
 export const board = {
   fetch(id) {
     return id
@@ -48,9 +54,9 @@ export const board = {
   }
 }
 
-export const auth = {
-  login(email, password) {
-    return request('post', '/login', { email, password });
+export const list = {
+  create(payload) {
+    return request('post', '/lists', payload);
   }
 }
 
