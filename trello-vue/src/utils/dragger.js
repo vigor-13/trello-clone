@@ -2,8 +2,8 @@ import dragula from 'dragula';
 import 'dragula/dist/dragula.css';
 
 const dragger = {
-  init(container) {
-    return dragula([...container]);
+  init(container, options) {
+    return dragula([...container], options);
   },
 
   siblings({ el, wrapper, candidates, type }) {
