@@ -1,8 +1,9 @@
 import React from 'react';
 import {
-  BrowserRouter as Router, Switch, Route, Link,
+  BrowserRouter as Router, Switch, Route,
 } from 'react-router-dom';
 
+import Header from './modules/Header';
 import Home from './modules/Home';
 import Login from './modules/Login';
 import NoMatch from './modules/NoMatch';
@@ -10,18 +11,7 @@ import NoMatch from './modules/NoMatch';
 function App() {
   return (
     <Router>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-          </ul>
-        </nav>
-      </div>
+      <Header />
       <Switch>
         <Route path="/login">
           <Login />
