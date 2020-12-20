@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import WithTheme from './modules/TrelloStyle';
+import { WithTheme } from './modules/TrelloStyle';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(

@@ -9,7 +9,7 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    line-height: 1.3;
+    line-height: normal;
   }
 
   h1,h2,h3,h4,h5,h6 {
@@ -39,6 +39,10 @@ const GlobalStyle = createGlobalStyle`
 const theme = {
   mainThemeColor: '#026aa7',
   mainBorderRadius: '4px',
+  palette: {
+    main: '#026aa7',
+    white: '#ffffff',
+  },
 };
 
 const WithTheme = (App) => (

@@ -1,3 +1,8 @@
 import WithTheme from './WithTheme';
+import { Button, LinkButton } from './components/Button';
 
-export default WithTheme;
+export {
+  WithTheme,
+  Button,
+  LinkButton,
+};

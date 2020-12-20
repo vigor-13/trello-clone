@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import heroSvg from '../../../resources/images/hero-a.svg';
 
 const Section = styled.section`
-  padding: 0;
+  padding: 50px 0;
 
   &#hero {
     background: linear-gradient(135deg, #0079bf, #5067c5);
