@@ -10,6 +10,7 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     margin: 0;
     line-height: normal;
+    font-size: 1em;
   }
 
   h1,h2,h3,h4,h5,h6 {
@@ -37,11 +38,12 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const theme = {
-  mainThemeColor: '#026aa7',
-  mainBorderRadius: '4px',
   palette: {
     main: '#026aa7',
     white: '#ffffff',
+    green: '#5AAC44',
+    blue: '#1E52CC',
+    anchor: '#0052CC',
   },
 };
 

@@ -1,12 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import { WithTheme } from './modules/TrelloStyle';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    {WithTheme(App)}
+    <BrowserRouter>
+      {WithTheme(App)}
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root'),
 );
