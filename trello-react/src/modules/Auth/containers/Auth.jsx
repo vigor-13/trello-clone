@@ -19,8 +19,6 @@ const AuthWrapper = styled.div`
 `;
 const AuthBody = styled.div`
   padding: 25px 40px;
-  box-shadow: rgba(0,0,0,0.1) 0 0 10px;
-  border-radius: 4px;
 
   & > h2 {
     text-align: center;
@@ -46,7 +44,7 @@ const StyledLink = styled(Link)`
 const Auth = ({ type }) => (
   <AuthWrapper>
     <h1>Trello</h1>
-    <AuthBody>
+    <AuthBody className="shadow-box">
       <h2>{type === 'signin' ? 'Login to Trello' : 'Sign up for your account'}</h2>
       <SigninForm type={type} />
       {type === 'signin' ? (

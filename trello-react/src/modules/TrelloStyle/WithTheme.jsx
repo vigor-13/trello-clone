@@ -35,6 +35,11 @@ const GlobalStyle = createGlobalStyle`
     left: 0;
     z-index: 1030;
   }
+
+  .shadow-box {
+    box-shadow: rgba(0,0,0,0.1) 0 0 10px;
+    border-radius: 4px;
+  }
 `;
 
 const theme = {
@@ -44,6 +49,7 @@ const theme = {
     green: '#5AAC44',
     blue: '#1E52CC',
     anchor: '#0052CC',
+    error: '#DE350C',
   },
 };
 
