@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import { Button } from '../../TrelloStyle';
+import AuthAPI from '../../../api';
 
 import ErrorMessage from '../components/ErrorMessage';
 
@@ -27,9 +28,16 @@ export default function AuthForm({ type }) {
   } = useForm({ mode: 'onChange' });
   const [submitError, setSubmitError] = useState('');
 
-  const onSubmitSuccess = () => {
+  const onSubmitSuccess = (data) => {
     clearErrors(['email', 'password', 'name']);
     setSubmitError('');
+
+    const authAPI = new AuthAPI();
+    authAPI
+      .login(data.email, data.password)
+      .then((res) => {
+        window.console.log(res);
+      });
   };
 
   const onSubmitError = () => {
@@ -97,7 +105,7 @@ export default function AuthForm({ type }) {
           type="password"
           placeholder="Create password"
           onBlur={() => onInputBlur('password')}
-          ref={register({ required: true, minLength: 8 })}
+          ref={register({ required: true, minLength: 6 })}
         />
         {errors.password && errors.password.type === 'required' && (
           <ErrorMessage parent={passwordGroupEl.current}>
@@ -106,7 +114,7 @@ export default function AuthForm({ type }) {
         )}
         {errors.password && errors.password.type === 'minLength' && (
           <ErrorMessage parent={passwordGroupEl.current}>
-            최소 8글자 이상의 비밀번호를 입력해주세요.
+            최소 6글자 이상의 비밀번호를 입력해주세요.
           </ErrorMessage>
         )}
       </InputGroup>

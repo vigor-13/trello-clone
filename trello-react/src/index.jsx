@@ -3,11 +3,12 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import { WithTheme } from './modules/TrelloStyle';
+import history from './routes/history';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter history={history}>
       {WithTheme(App)}
     </BrowserRouter>
   </React.StrictMode>,
