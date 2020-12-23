@@ -1,7 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
+import { RecoilRoot } from 'recoil';
+
 import App from './App';
+import { DebugObserver } from './store';
 import { WithTheme } from './modules/TrelloStyle';
 import history from './routes/history';
 import reportWebVitals from './reportWebVitals';
@@ -9,7 +12,10 @@ import reportWebVitals from './reportWebVitals';
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter history={history}>
-      {WithTheme(App)}
+      <RecoilRoot>
+        <DebugObserver />
+        {WithTheme(App)}
+      </RecoilRoot>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root'),

@@ -1,9 +1,10 @@
 import React, { useState, useRef } from 'react';
+import { useSetRecoilState } from 'recoil';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
+import { jwtTokenState } from '../../../store';
 import { Button } from '../../TrelloStyle';
 import AuthAPI from '../../../api';
-
 import ErrorMessage from '../components/ErrorMessage';
 
 const StyledInput = styled.input`
@@ -19,6 +20,8 @@ const StyledInput = styled.input`
 const InputGroup = styled.div``;
 
 export default function AuthForm({ type }) {
+  const setJwtTokenState = useSetRecoilState(jwtTokenState);
+
   const emailGroupEl = useRef(null);
   const passwordGroupEl = useRef(null);
   const nameGroupEl = useRef(null);
@@ -37,6 +40,10 @@ export default function AuthForm({ type }) {
       .login(data.email, data.password)
       .then((res) => {
         window.console.log(res);
+        setJwtTokenState((oldState) => ({
+          ...oldState,
+          token: res.accessToken,
+        }));
       });
   };
 
