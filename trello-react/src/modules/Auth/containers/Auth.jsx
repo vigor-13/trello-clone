@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import SigninForm from './AuthForm';
+import AuthForm from './AuthForm';
 
 const AuthWrapper = styled.div`
   max-width: 400px;
@@ -46,7 +46,7 @@ const Auth = ({ type }) => (
     <h1>Trello</h1>
     <AuthBody className="shadow-box">
       <h2>{type === 'signin' ? 'Login to Trello' : 'Sign up for your account'}</h2>
-      <SigninForm type={type} />
+      <AuthForm type={type} />
       {type === 'signin' ? (
         <StyledLink to="/signup">Sign up for an account</StyledLink>
       ) : (

@@ -1,11 +1,10 @@
-import React, { useState, useRef } from 'react';
-import { useSetRecoilState } from 'recoil';
+import React, { useState, useRef, useContext } from 'react';
+import { observer } from 'mobx-react-lite';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
-import { jwtTokenState } from '../../../store';
 import { Button } from '../../TrelloStyle';
-import AuthAPI from '../../../api';
 import ErrorMessage from '../components/ErrorMessage';
+import { UserContext } from '../../../stores';
 
 const StyledInput = styled.input`
   width: 100%;
@@ -19,9 +18,8 @@ const StyledInput = styled.input`
 `;
 const InputGroup = styled.div``;
 
-export default function AuthForm({ type }) {
-  const setJwtTokenState = useSetRecoilState(jwtTokenState);
-
+const AuthForm = observer(({ type }) => {
+  const user = useContext(UserContext);
   const emailGroupEl = useRef(null);
   const passwordGroupEl = useRef(null);
   const nameGroupEl = useRef(null);
@@ -34,17 +32,7 @@ export default function AuthForm({ type }) {
   const onSubmitSuccess = (data) => {
     clearErrors(['email', 'password', 'name']);
     setSubmitError('');
-
-    const authAPI = new AuthAPI();
-    authAPI
-      .login(data.email, data.password)
-      .then((res) => {
-        window.console.log(res);
-        setJwtTokenState((oldState) => ({
-          ...oldState,
-          token: res.accessToken,
-        }));
-      });
+    user.setToken(data.email, data.password);
   };
 
   const onSubmitError = () => {
@@ -144,4 +132,6 @@ export default function AuthForm({ type }) {
       </Button>
     </form>
   );
-}
+});
+
+export default AuthForm;

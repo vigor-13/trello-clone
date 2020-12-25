@@ -1,10 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import { RecoilRoot } from 'recoil';
 
 import App from './App';
-import { DebugObserver } from './store';
+import { UserContext, userContext } from './stores';
 import { WithTheme } from './modules/TrelloStyle';
 import history from './routes/history';
 import reportWebVitals from './reportWebVitals';
@@ -12,10 +11,9 @@ import reportWebVitals from './reportWebVitals';
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter history={history}>
-      <RecoilRoot>
-        <DebugObserver />
+      <UserContext.Provider value={userContext}>
         {WithTheme(App)}
-      </RecoilRoot>
+      </UserContext.Provider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root'),
