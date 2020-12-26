@@ -8,19 +8,15 @@ const AuthRoute = observer(({
 }) => (
   <Route
     {...rest}
-    render={() => {
-      console.log('AA');
-      console.log(isSignin);
-      return (
-        isSignin ? (
-          children
-        ) : (
-          <Redirect
-            to={{ pathname: '/signin', state: { from: path } }}
-          />
-        )
-      );
-    }}
+    render={() => (
+      isSignin ? (
+        children
+      ) : (
+        <Redirect
+          to={{ pathname: '/signin', state: { from: path } }}
+        />
+      )
+    )}
   />
 ));
 

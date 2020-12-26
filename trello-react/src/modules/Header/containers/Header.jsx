@@ -4,11 +4,11 @@ import NavBar from './NavBar';
 import UserNavBar from './UserNavBar';
 
 export default function Header(props) {
-  const { isLoggedIn } = props;
+  const { type } = props;
 
   return (
-    <header className={isLoggedIn ? '' : 'fixed-top'}>
-      {isLoggedIn ? <UserNavBar /> : <NavBar /> }
+    <header className={type === 'home' ? 'fixed-top' : ''}>
+      {type === 'home' ? <NavBar /> : <UserNavBar /> }
     </header>
   );
 }
