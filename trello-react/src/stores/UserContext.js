@@ -11,13 +11,20 @@ class UserStore {
     makeAutoObservable(this);
   }
 
-  setToken = (email, password) => {
-    authAPI
-      .login(email, password)
-      .then((res) => {
-        this.token = res.accessToken;
-      });
+  signin = (email, password) => authAPI
+    .login(email, password)
+    .then((res) => {
+      this.setToken(res.accessToken);
+    })
+
+  setToken = (token) => {
+    if (!token) return;
+    this.token = token;
+    localStorage.setItem('token', token);
+    authAPI.setAuthInHeader(token);
   }
+
+  isSignin = () => !!this.token
 }
 
 const userContext = new UserStore();

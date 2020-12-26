@@ -1,4 +1,5 @@
 import React, { useState, useRef, useContext } from 'react';
+import { useLocation, withRouter } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
@@ -18,7 +19,9 @@ const StyledInput = styled.input`
 `;
 const InputGroup = styled.div``;
 
-const AuthForm = observer(({ type }) => {
+const AuthForm = observer(withRouter((props) => {
+  const { type, history } = props;
+  const location = useLocation();
   const user = useContext(UserContext);
   const emailGroupEl = useRef(null);
   const passwordGroupEl = useRef(null);
@@ -32,7 +35,12 @@ const AuthForm = observer(({ type }) => {
   const onSubmitSuccess = (data) => {
     clearErrors(['email', 'password', 'name']);
     setSubmitError('');
-    user.setToken(data.email, data.password);
+    user
+      .signin(data.email, data.password)
+      .then(() => {
+        if (location.state) history.push(location.state.from);
+        history.push('/');
+      });
   };
 
   const onSubmitError = () => {
@@ -132,6 +140,6 @@ const AuthForm = observer(({ type }) => {
       </Button>
     </form>
   );
-});
+}));
 
 export default AuthForm;
